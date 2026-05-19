@@ -6,7 +6,9 @@ A full-stack project management application with role-based access control, Kanb
 
 **Frontend:** React + Vite, Tailwind CSS, React Query, React Router v6, Recharts, Tabler Icons  
 **Backend:** Node.js + Express, Prisma ORM, MongoDB, JWT auth with refresh tokens  
-**Design:** Dark theme with custom design system, 8px grid, Inter typography, motion animations
+**Design:** Dark theme with custom design system, 8px grid, Inter typography, motion animations  
+
+> 🚀 **Live:** [soothing-energy-production-c6e0.up.railway.app](https://soothing-energy-production-c6e0.up.railway.app)
 
 ## Features
 
