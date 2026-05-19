@@ -6,11 +6,10 @@
   "scripts": {
     "dev": "nodemon src/index.js",
     "start": "node src/index.js",
+    "postinstall": "npx prisma generate",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "db:migrate": "npx prisma migrate dev",
     "db:push": "npx prisma db push",
-    "db:seed": "node prisma/seed.js",
-    "prisma:generate": "npx prisma generate"
+    "db:seed": "node prisma/seed.js"
   },
   "keywords": [],
   "author": "",
