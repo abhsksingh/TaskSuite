@@ -3,7 +3,7 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "mongodb"
   url      = env("DATABASE_URL")
 }
 
@@ -30,13 +30,13 @@ enum TaskPriority {
 }
 
 model User {
-  id        String   @id @default(uuid())
+  id        String   @id @default(uuid()) @map("_id")
   name      String
   email     String   @unique
   password  String
   role      GlobalRole @default(MEMBER)
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  updatedAt DateTime @default(now())
 
   ownedProjects  Project[]
   assignedTasks  Task[]
@@ -47,7 +47,7 @@ model User {
 }
 
 model RefreshToken {
-  id        String   @id @default(uuid())
+  id        String   @id @default(uuid()) @map("_id")
   token     String   @unique
   userId    String
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -58,7 +58,7 @@ model RefreshToken {
 }
 
 model Project {
-  id          String      @id @default(uuid())
+  id          String      @id @default(uuid()) @map("_id")
   title       String
   description String?
   status      String      @default("ACTIVE")
@@ -66,7 +66,7 @@ model Project {
   ownerId     String
   owner       User        @relation(fields: [ownerId], references: [id])
   createdAt   DateTime    @default(now())
-  updatedAt   DateTime    @updatedAt
+  updatedAt   DateTime    @default(now())
 
   tasks      Task[]
   members    ProjectMember[]
@@ -76,7 +76,7 @@ model Project {
 }
 
 model Task {
-  id          String       @id @default(uuid())
+  id          String       @id @default(uuid()) @map("_id")
   title       String
   description String?
   status      TaskStatus   @default(TODO)
@@ -87,12 +87,13 @@ model Task {
   project     Project      @relation(fields: [projectId], references: [id], onDelete: Cascade)
   dueDate     DateTime?
   createdAt   DateTime     @default(now())
-  updatedAt   DateTime     @updatedAt
+  updatedAt   DateTime     @default(now())
 
   @@map("tasks")
 }
 
 model ProjectMember {
+  id        String      @id @default(uuid()) @map("_id")
   userId    String
   user      User        @relation(fields: [userId], references: [id], onDelete: Cascade)
   projectId String
@@ -100,6 +101,6 @@ model ProjectMember {
   role      ProjectRole @default(MEMBER)
   joinedAt  DateTime    @default(now())
 
-  @@id([userId, projectId])
+  @@unique([userId, projectId])
   @@map("project_members")
 }

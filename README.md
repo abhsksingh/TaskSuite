@@ -5,7 +5,7 @@ A full-stack project management application with role-based access control, Kanb
 ## Tech Stack
 
 **Frontend:** React + Vite, Tailwind CSS, React Query, React Router v6, Recharts, Tabler Icons  
-**Backend:** Node.js + Express, Prisma ORM, PostgreSQL (SQLite for dev), JWT auth with refresh tokens  
+**Backend:** Node.js + Express, Prisma ORM, MongoDB, JWT auth with refresh tokens  
 **Design:** Dark theme with custom design system, 8px grid, Inter typography, motion animations
 
 ## Features
@@ -30,7 +30,7 @@ A full-stack project management application with role-based access control, Kanb
 ### Prerequisites
 
 - Node.js 18+
-- PostgreSQL (or SQLite for development — configured by default)
+- MongoDB Atlas (or local MongoDB) — connection string in `.env`
 
 ### Installation
 
@@ -42,8 +42,8 @@ cd TaskSuite
 # Backend setup
 cd backend
 npm install
-cp .env.example .env        # Configure your database URL
-npx prisma db push          # Create database tables
+# Edit .env and replace DATABASE_URL with your MongoDB connection string
+npx prisma db push          # Create collections & indexes
 node prisma/seed.js         # Seed demo data
 npm run dev                 # Start backend on :3001
 
